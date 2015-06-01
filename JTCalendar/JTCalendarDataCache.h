@@ -15,5 +15,6 @@
 
 - (void)reloadData;
 - (BOOL)haveEvent:(NSDate *)date;
+- (UIColor *)circleIndicatorColor:(NSDate *)date;
 
 @end

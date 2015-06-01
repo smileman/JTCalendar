@@ -71,6 +71,9 @@
     self.dayCircleColorTodayOtherMonth = self.dayCircleColorToday;
     self.dayTextColorTodayOtherMonth = self.dayTextColorToday;
     self.dayDotColorTodayOtherMonth = self.dayDotColorToday;
+	
+	self.dayCircleIndicatorBorderWidth = .0;
+	self.dayCircleIndicatorBorderColor = [UIColor clearColor];
     
     self.monthBlock = ^NSString *(NSDate *date, JTCalendar *jt_calendar){
         NSCalendar *calendar = jt_calendar.calendarAppearance.calendar;

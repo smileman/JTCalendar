@@ -11,6 +11,7 @@
 
 @interface JTCalendarDataCache(){
     NSMutableDictionary *events;
+	NSMutableDictionary *borderColors;
     NSDateFormatter *dateFormatter;
 };
 
@@ -28,13 +29,14 @@
     dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     events = [NSMutableDictionary new];
-    
+	borderColors = [NSMutableDictionary new];
     return self;
 }
 
 - (void)reloadData
 {
     [events removeAllObjects];
+	[borderColors removeAllObjects];
 }
 
 - (BOOL)haveEvent:(NSDate *)date
@@ -59,6 +61,32 @@
     }
     
     return haveEvent;
+}
+
+- (UIColor *)circleIndicatorColor:(NSDate *)date {
+	if(!self.calendarManager.dataSource || ![self.calendarManager.dataSource respondsToSelector:@selector(calendarDayCircleIndicatorColor:date:)]){
+		return self.calendarManager.calendarAppearance.dayCircleIndicatorBorderColor;
+	}
+	
+	if(!self.calendarManager.calendarAppearance.useCacheSystem){
+		UIColor *borderColor = [self.calendarManager.dataSource calendarDayCircleIndicatorColor:self.calendarManager date:date];
+		return borderColor != nil ? borderColor : self.calendarManager.calendarAppearance.dayCircleIndicatorBorderColor;
+	}
+	
+	UIColor *borderColor;
+	NSString *key = [dateFormatter stringFromDate:date];
+	
+	if(borderColors[key] != nil){
+		borderColor = borderColors[key];
+	}
+	else{
+		borderColor = [self.calendarManager.dataSource calendarDayCircleIndicatorColor:self.calendarManager date:date];
+		if (borderColor != nil) {
+			borderColors[key] = borderColor;
+		}
+	}
+	
+	return borderColor;
 }
 
 @end

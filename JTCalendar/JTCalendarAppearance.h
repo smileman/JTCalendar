@@ -17,6 +17,11 @@ typedef NS_ENUM(NSInteger, JTCalendarWeekDayFormat) {
     JTCalendarWeekDayFormatFull
 };
 
+typedef NS_ENUM(NSInteger, JTCalendarDayIndicatorFormat) {
+	JTCalendarDayIndicatorFormatDot,
+	JTCalendarDayIndicatorFormatCircle
+};
+
 typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar);
 
 /**
@@ -83,6 +88,11 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
 @property (nonatomic) UIFont *weekDayTextFont;
 
 #pragma mark - Day
+
+/**
+ *	The default value of this property is @c JTCalendarDayIndicatorFormatDot.
+ */
+@property (assign, nonatomic) JTCalendarDayIndicatorFormat dayIndicatorFormat;
 
 /**
  *	The default value of this property is @c redColor.
@@ -179,6 +189,18 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
  *	The default value of this property is @c dd.
  */
 @property (nonatomic) NSString *dayFormat;
+
+#pragma mark - Day circle indicator border width and color
+
+/**
+ *	The default value of this property is @c 0.0.
+ */
+@property (assign, nonatomic) CGFloat dayCircleIndicatorBorderWidth;
+
+/**
+ *	The default value of this property is @c clearColor.
+ */
+@property (nonatomic) UIColor *dayCircleIndicatorBorderColor;
 
 #pragma mark - Day Background and Border
 
