@@ -128,7 +128,7 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
     circleView.layer.cornerRadius = circleIndicatorView.layer.cornerRadius = sizeCircle / 2.;
     
     dotView.frame = CGRectMake(0, 0, sizeDot, sizeDot);
-	dotView.center = CGPointMake(self.frame.size.width / 2., (self.frame.size.height / 2.) +sizeDot * 2.5);
+	dotView.center = CGPointMake(self.frame.size.width / 2., self.frame.size.height - sizeDot / 2);
     dotView.layer.cornerRadius = sizeDot / 2.;
 }
 
@@ -206,18 +206,20 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
     circleView.transform = CGAffineTransformIdentity;
     CGAffineTransform tr = CGAffineTransformIdentity;
     CGFloat opacity = 1.;
+	
+	UIColor *dotColor = [self dotColor];
     
     if(selected){
         if(!self.isOtherMonth){
             circleView.color = [self.calendarManager.calendarAppearance dayCircleColorSelected];
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorSelected];
-			dotView.color = [self.calendarManager.calendarAppearance dayDotColorSelected];
+			dotView.color = dotColor != nil ? dotColor : [self.calendarManager.calendarAppearance dayDotColorSelected];
 			circleIndicatorView.layer.borderColor = [self circleIndicatorBorderColor].CGColor;
         }
         else{
             circleView.color = [self.calendarManager.calendarAppearance dayCircleColorSelectedOtherMonth];
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorSelectedOtherMonth];
-            dotView.color = [self.calendarManager.calendarAppearance dayDotColorSelectedOtherMonth];
+            dotView.color = dotColor != nil ? dotColor : [self.calendarManager.calendarAppearance dayDotColorSelectedOtherMonth];
 			circleIndicatorView.layer.borderColor = [self circleIndicatorBorderColor].CGColor;
         }
         
@@ -228,25 +230,25 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
         if(!self.isOtherMonth){
             circleView.color = [self.calendarManager.calendarAppearance dayCircleColorToday];
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorToday];
-            dotView.color = [self.calendarManager.calendarAppearance dayDotColorToday];
+            dotView.color = dotColor != nil ? dotColor : [self.calendarManager.calendarAppearance dayDotColorToday];
 			circleIndicatorView.layer.borderColor = [self circleIndicatorBorderColor].CGColor;
         }
         else{
             circleView.color = [self.calendarManager.calendarAppearance dayCircleColorTodayOtherMonth];
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorTodayOtherMonth];
-            dotView.color = [self.calendarManager.calendarAppearance dayDotColorTodayOtherMonth];
+            dotView.color = dotColor != nil ? dotColor : [self.calendarManager.calendarAppearance dayDotColorTodayOtherMonth];
 			circleIndicatorView.layer.borderColor = [self circleIndicatorBorderColor].CGColor;
         }
     }
     else{
         if(!self.isOtherMonth){
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColor];
-            dotView.color = [self.calendarManager.calendarAppearance dayDotColor];
+            dotView.color = dotColor != nil ? dotColor : [self.calendarManager.calendarAppearance dayDotColor];
 			circleIndicatorView.layer.borderColor = [self circleIndicatorBorderColor].CGColor;
         }
         else{
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorOtherMonth];
-            dotView.color = [self.calendarManager.calendarAppearance dayDotColorOtherMonth];
+            dotView.color = dotColor != nil ? dotColor : [self.calendarManager.calendarAppearance dayDotColorOtherMonth];
 			circleIndicatorView.layer.borderColor = [self circleIndicatorBorderColor].CGColor;
         }
         
@@ -356,6 +358,10 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 
 - (UIColor *)circleIndicatorBorderColor {
 	return [self.calendarManager.dataCache circleIndicatorColor:self.date];
+}
+
+- (UIColor *)dotColor {
+	return [self.calendarManager.dataCache dotColor:self.date];
 }
 
 @end
