@@ -133,6 +133,12 @@
     
     self.dayTextColorToday = textColor;
     self.dayTextColorTodayOtherMonth = textColor;
+	
+	self.dayTextColorHoliday = textColor;
+	self.dayTextColorSelectedHoliday = textColor;
+	
+	self.dayTextColorOtherMonthHoliday = textColor;
+	self.dayTextColorSelectedOtherMonthHoliday = textColor;
 }
 
 @end

@@ -180,6 +180,27 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
 @property (nonatomic) UIColor *dayTextColorTodayOtherMonth;
 
 /**
+ *	The default value of this property is @c blackColor.
+ */
+@property (nonatomic) UIColor *dayTextColorHoliday;
+
+/**
+ *	The default value of this property is @c whiteColor.
+ */
+@property (nonatomic) UIColor *dayTextColorSelectedHoliday;
+
+/**
+ *	The default value of this property is gray nuance:
+ *	@code [UIColor colorWithRed:152./256. green:147./256. blue:157./256. alpha:1.] @endcode
+ */
+@property (nonatomic) UIColor *dayTextColorOtherMonthHoliday;
+
+/**
+ *	The default value of this property is @c whiteColor.
+ */
+@property (nonatomic) UIColor *dayTextColorSelectedOtherMonthHoliday;
+
+/**
  *	The default value of this property is:
  *	@code [UIFont systemFontOfSize:[UIFont systemFontSize]] @endcode
  */
