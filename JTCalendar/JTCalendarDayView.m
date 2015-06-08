@@ -321,13 +321,17 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 }
 
 - (BOOL)isHoliday {
-	NSCalendar *calendar = self.calendarManager.calendarAppearance.calendar;
-	if(!self.calendarManager.calendarAppearance.isWeekMode){
-		NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday fromDate:self.date];
-		NSInteger dayIndex = comps.weekday;
-		return dayIndex == 1 || dayIndex == 7;
-	} else {
+	if (self.date == nil) {
 		return NO;
+	} else {
+		NSCalendar *calendar = self.calendarManager.calendarAppearance.calendar;
+		if(!self.calendarManager.calendarAppearance.isWeekMode){
+			NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday fromDate:self.date];
+			NSInteger dayIndex = comps.weekday;
+			return dayIndex == 1 || dayIndex == 7;
+		} else {
+			return NO;
+		}
 	}
 }
 
